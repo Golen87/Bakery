@@ -6,9 +6,23 @@ export default class LevelScene extends Phaser.Scene {
 	}
 
 	create() {
-		this.cameras.main.setBackgroundColor(0x333333);
+		this.cameras.main.setBackgroundColor(0xFFFFFF);
 
-		this.player = new Player(this, this.CX, this.CY);
+		this.bg = [];
+		for (let i = 0; i < 3; i++) {
+			let s = [0.8, 0.9, 1.1][i];
+			this.bg[i] = this.add.image(this.CX, this.CY, 'bg'+(i+1));
+			this.bg[i].setScale(s);
+			this.bg[i].setScrollFactor(s, 1.0);
+			this.bg[i].setDepth(i);
+		}
+		this.bg[2].x += 100;
+
+		this.cameras.main.setScroll(0, 0);
+
+
+		this.player = new Player(this, this.CX, 460);
+		this.player.setDepth(1);
 
 
 		/* Input */
@@ -19,6 +33,8 @@ export default class LevelScene extends Phaser.Scene {
 
 	update(time, delta) {
 		this.player.update(time, delta);
+		// this.cameras.main.scrollX = 500*Math.sin(time/1000);
+		this.cameras.main.scrollX = this.player.x - this.CX;
 	}
 
 

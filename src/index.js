@@ -7,14 +7,14 @@ import RoundRectanglePlugin from 'phaser3-rex-plugins/plugins/roundrectangle-plu
 const config = {
 	type: Phaser.AUTO,
 	parent: 'Bakery',
-	width: 1000,
-	height: 600,
+	width: 1280,
+	height: 720,
 	scale: {
 		mode: Phaser.Scale.FIT,
 		autoCenter: Phaser.Scale.CENTER_BOTH,
 		parent: "game",
-		width: 1000,
-		height: 600
+		width: 1280,
+		height: 720
 	},
 	scene: [
 		PreloadScene,
