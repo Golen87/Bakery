@@ -1,39 +1,35 @@
 import Phaser from 'phaser';
-import logoImg from './assets/logo.png';
-
-class MyGame extends Phaser.Scene
-{
-    constructor ()
-    {
-        super();
-    }
-
-    preload ()
-    {
-        this.load.image('logo', logoImg);
-    }
-      
-    create ()
-    {
-        const logo = this.add.image(400, 150, 'logo');
-      
-        this.tweens.add({
-            targets: logo,
-            y: 450,
-            duration: 1000,
-            ease: "Power2",
-            yoyo: true,
-            loop: -1
-        });
-    }
-}
+import PreloadScene from "./scenes/PreloadScene.js";
+import TitleScene from "./scenes/TitleScene.js";
+import LevelScene from "./scenes/LevelScene.js";
+import RoundRectanglePlugin from 'phaser3-rex-plugins/plugins/roundrectangle-plugin.js';
 
 const config = {
-    type: Phaser.AUTO,
-    parent: 'phaser-example',
-    width: 800,
-    height: 600,
-    scene: MyGame
+	type: Phaser.AUTO,
+	parent: 'Bakery',
+	width: 1000,
+	height: 600,
+	scale: {
+		mode: Phaser.Scale.FIT,
+		autoCenter: Phaser.Scale.CENTER_BOTH,
+		parent: "game",
+		width: 1000,
+		height: 600
+	},
+	scene: [
+		PreloadScene,
+		TitleScene,
+		LevelScene
+	],
+	plugins: {
+		global: [
+			{
+				key: 'rexRoundRectanglePlugin',
+				plugin: RoundRectanglePlugin,
+				start: true
+			}
+		]
+	}
 };
 
 const game = new Phaser.Game(config);
